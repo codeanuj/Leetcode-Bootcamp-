@@ -14,8 +14,8 @@ class Solution {
         if(map.containsKey(current_key))
             return map.get(current_key);
         
-        int a = fib(n-1);
-        int b = fib(n-2);
+        int a = calculateFib(n-1, map);
+        int b = calculateFib(n-2, map);
         
         map.put(current_key, a+b);
         return a+b;
