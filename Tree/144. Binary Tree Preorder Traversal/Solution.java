@@ -28,3 +28,18 @@ class Solution {
 
     }
 }
+
+//Iterative Solution
+    public List<Integer> preorderTraversalWithIteration(TreeNode root) {
+       List<Integer> list = new ArrayList<Integer>(); 
+       if(root==null) return list;
+       Stack<TreeNode> stack = new Stack<>();
+       stack.push(root);
+       while(!stack.isEmpty()){
+           TreeNode curr_node = stack.pop();
+           list.add(curr_node.val);
+           if(curr_node.right!=null) stack.push(curr_node.right);
+           if(curr_node.left!=null) stack.push(curr_node.left);
+       }
+       return list;
+}
