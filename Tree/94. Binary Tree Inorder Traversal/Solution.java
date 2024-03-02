@@ -27,4 +27,24 @@ class Solution {
         inorderTraversal(root.right, list);
         return;
     }
+//Iterative Solution
+      public List<Integer> inorderTraversal(TreeNode root) {
+       List<Integer> list = new ArrayList<Integer>();
+       Stack<TreeNode> stack = new Stack<>();
+       TreeNode curr_node = root;
+       TreeNode temp = null;
+
+       while(curr_node != null || !stack.isEmpty()){
+           if(curr_node!=null){
+               stack.push(curr_node);
+               curr_node = curr_node.left;
+           }
+           else{
+               temp = stack.pop();
+               list.add(temp.val);
+               if(temp.right!=null) curr_node = temp.right;
+           }
+       }
+       return list;
+    }
 }
