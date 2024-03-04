@@ -24,7 +24,7 @@ class Solution {
         while(!queue.isEmpty()){
             int size = queue.size();
             List<Integer> list = new ArrayList<>();
-            while(size != 0){
+            while(size > 0){
                 current = queue.poll();
                 list.add(current.val);
                 size-=1;
