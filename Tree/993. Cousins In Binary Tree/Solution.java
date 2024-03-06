@@ -40,4 +40,42 @@ class Solution {
         findCousins(root.right, root, x, y, height+1, parents, levels);
         return;
     }
+
+    // By BFS
+
+     class Pair{
+        TreeNode node;
+        TreeNode parent;
+
+        public Pair(TreeNode node, TreeNode parent){
+            this.node =node;
+            this.parent =parent;
+        }
+    }
+    public boolean isCousins(TreeNode root, int x, int y) {
+        TreeNode parentOfX = null;
+        TreeNode parentOfY = null;
+
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(root, new TreeNode(-1)));
+
+        while(!queue.isEmpty()){
+            int size = queue.size();
+
+            for(int i=0; i<size; i++){
+                Pair currentPair = queue.remove();
+                TreeNode currentNode = currentPair.node;
+                TreeNode currrentParent = currentPair.parent;
+                if(currentNode.val == x) parentOfX = currrentParent;
+                if(currentNode.val == y) parentOfY = currrentParent;
+
+                if(currentNode.left != null) queue.add(new Pair(currentNode.left, currentNode ));
+                if(currentNode.right != null) queue.add(new Pair(currentNode.right, currentNode ));
+            }
+
+            if(parentOfX != null && parentOfY != null) return parentOfX != parentOfY;
+            if(parentOfX != null || parentOfY != null) return false; 
+        }
+        return false;
+    }
 }
