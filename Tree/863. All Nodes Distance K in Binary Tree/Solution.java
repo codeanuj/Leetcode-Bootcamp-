@@ -38,4 +38,36 @@ class Solution {
         iterateTree(map.get(current), distance-1);
         return;
     }
+
+    //BY BFS
+
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        createParentChildMap(root, null);
+        Queue<TreeNode> queue = new LinkedList<>();
+        int levelProcessed=-1;
+
+        queue.add(target);
+
+        while(!queue.isEmpty()){
+            int size = queue.size();
+             levelProcessed+=1;
+            for(int i =0; i<size; i++){
+                TreeNode current = queue.remove();
+
+                if(visited.contains(current)) continue;
+
+                if(levelProcessed == k){
+                     answer.add(current.val);
+                     continue;
+                }
+                if(current.left != null) queue.add(current.left);
+                if(current.right != null) queue.add(current.right);
+                if(map.get(current) != null) queue.add(map.get(current));
+                visited.add(current); 
+            }
+           
+            if(levelProcessed == k) return answer;
+        }
+        return answer;   
+    }
 }
